@@ -20,10 +20,6 @@ In the eclipse java editor window, right click and select Source -> Generate Bui
 
 ![Context menu](https://s3-eu-west-1.amazonaws.com/bpep.files/usage-context-menu-option.jpg)
 
-Then select which fields you want to expose in the builder.
-
-![Selection window](https://s3-eu-west-1.amazonaws.com/bpep.files/usage-selection-window.jpg)
-
 ## Contributing
 1. Fork this project
 1. Make your changes
