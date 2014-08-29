@@ -20,51 +20,51 @@ import org.eclipse.ui.IWorkbenchWindowActionDelegate;
 
 public class GenerateBuilderAction extends Action implements IEditorActionDelegate, IWorkbenchWindowActionDelegate {
 
-	private IEditorPart editor;
+    private IEditorPart editor;
 
-	/**
-	 * @see IActionDelegate#run(IAction)
-	 */
-	public void run(IAction action) {
-		IWorkingCopyManager manager = JavaUI.getWorkingCopyManager();
-		IEditorInput editorInput = editor.getEditorInput();
-		try {
-			manager.connect(editorInput);
-			ICompilationUnit workingCopy = manager.getWorkingCopy(editorInput);
+    /**
+     * @see IActionDelegate#run(IAction)
+     */
+    public void run(final IAction action) {
+        final IWorkingCopyManager manager = JavaUI.getWorkingCopyManager();
+        final IEditorInput editorInput = editor.getEditorInput();
+        try {
+            manager.connect(editorInput);
+            final ICompilationUnit workingCopy = manager.getWorkingCopy(editorInput);
 
-			CreateDialog dialog = new CreateDialog(new Shell());
-			dialog.show(workingCopy);
+            final CreateDialog dialog = new CreateDialog(new Shell());
+            dialog.show(workingCopy);
 
-			synchronized (workingCopy) {
-				workingCopy.reconcile(ICompilationUnit.NO_AST, false, null, null);
-			}
+            synchronized (workingCopy) {
+                workingCopy.reconcile(ICompilationUnit.NO_AST, false, null, null);
+            }
 
-		} catch (JavaModelException e) {
-			e.printStackTrace();
-		} catch (CoreException e) {
-			e.printStackTrace();
-		} finally {
-			manager.disconnect(editorInput);
-		}
+        } catch (final JavaModelException e) {
+            e.printStackTrace();
+        } catch (final CoreException e) {
+            e.printStackTrace();
+        } finally {
+            manager.disconnect(editorInput);
+        }
 
-	}
+    }
 
-	/**
-	 * @see IActionDelegate#selectionChanged(IAction, ISelection)
-	 */
-	public void selectionChanged(IAction action, ISelection selection) {
-	}
+    /**
+     * @see IActionDelegate#selectionChanged(IAction, ISelection)
+     */
+    public void selectionChanged(final IAction action, final ISelection selection) {
+    }
 
-	public void setActiveEditor(IAction action, IEditorPart targetEditor) {
-		this.editor = targetEditor;
-	}
+    public void setActiveEditor(final IAction action, final IEditorPart targetEditor) {
+        editor = targetEditor;
+    }
 
     public void dispose() {
         // TODO Auto-generated method stub
 
     }
 
-    public void init(IWorkbenchWindow window) {
+    public void init(final IWorkbenchWindow window) {
         editor = window.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
     }
 
