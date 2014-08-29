@@ -1,6 +1,6 @@
 package no.bekk.boss.bpep.popup.actions;
 
-import no.bekk.boss.bpep.view.CreateDialog;
+import no.bekk.boss.bpep.generator.BuilderGenerator;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.ICompilationUnit;
@@ -10,7 +10,6 @@ import org.eclipse.jdt.ui.JavaUI;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IEditorActionDelegate;
 import org.eclipse.ui.IEditorInput;
@@ -32,8 +31,7 @@ public class GenerateBuilderAction extends Action implements IEditorActionDelega
             manager.connect(editorInput);
             final ICompilationUnit workingCopy = manager.getWorkingCopy(editorInput);
 
-            final CreateDialog dialog = new CreateDialog(new Shell());
-            dialog.show(workingCopy);
+            new BuilderGenerator().generate(workingCopy);
 
             synchronized (workingCopy) {
                 workingCopy.reconcile(ICompilationUnit.NO_AST, false, null, null);
